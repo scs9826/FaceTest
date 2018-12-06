@@ -26,12 +26,12 @@ def detect():
             # 把脸单独拿出来
             roi_gray = gray[y: y + h, x: x + w]
             img1 = frame[y: y + h, x: x + w]
-            cv2.imwrite("./Yale/17/s" + str(k) + '.bmp', roi_gray)
-            pic = cv2.imread("./Yale/17/s" + str(k) + '.bmp')
+            cv2.imwrite("./Yale/16/s" + str(k) + '.bmp', roi_gray)
+            pic = cv2.imread("./Yale/16/s" + str(k) + '.bmp')
             pic = cv2.resize(pic, (100, 100), interpolation=cv2.INTER_CUBIC)
-            os.remove("./Yale/17/s" + str(k) + '.bmp')
+            os.remove("./Yale/16/s" + str(k) + '.bmp')
             if j % 20 == 0:
-                cv2.imwrite("./Yale/17/s" + str(k) + '.bmp', pic)
+                cv2.imwrite("./Yale/16/s" + str(k) + '.bmp', pic)
                 k += 1
                 print(str(int(j / 20)))
             j = j + 1

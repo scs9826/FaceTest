@@ -97,6 +97,7 @@ def testPic(dataMat, label):
     print("thread")
     j = 0
     isRight = 0
+    isRight2 = 0
     testTimes = 0
     while True:
         testImgSet = './pic/s0.bmp'
@@ -119,8 +120,10 @@ def testPic(dataMat, label):
         # print('disList', disList)
         sortIndex = np.argsort(disList)
         print(label[sortIndex[0]])
-        if 16 == int(label[sortIndex[0]]) or 17 == int(label[sortIndex[0]]):
+        if 16 == int(label[sortIndex[0]]):
             isRight = isRight + 1
+        if 17 == int(label[sortIndex[0]]):
+            isRight2 = isRight2 + 1
         os.remove('./pic/s0.bmp')
         j = j + 1
         # j = j + 1
@@ -131,14 +134,28 @@ def testPic(dataMat, label):
         #     cv2.rectangle(img, (x+ex, y+ey), (x+ex+ew, y+ey+eh), (0, 255, 0), 2)
         if j == 5:
             if isRight >= 4:
-                print("测试成功")
+                print("欢迎你，史长顺！")
                 # break
                 camera.release()
                 cv2.destroyAllWindows()
+                break
             else:
                 isRight = 0
                 testTimes += 1
                 print("测试失败")
+                if testTimes >= 5:
+                    # break
+                    camera.release()
+                j = 0
+            if isRight2 >= 4:
+                print("欢迎你，饶丝雨！")
+                # break
+                camera.release()
+                cv2.destroyAllWindows()
+            else:
+                isRight2 = 0
+                testTimes += 1
+                print("测试失败2")
                 if testTimes >= 5:
                     # break
                     camera.release()
