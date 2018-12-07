@@ -15,8 +15,7 @@ camera = cv2.VideoCapture(0)
 
 def detect(dataMat, label):
     # 创建人脸检测的对象
-    face_cascade = cv2.CascadeClassifier("./venv/Lib/site-packages/cv2/data/haarcascade_frontalface_default"
-                                         ".xml")
+    face_cascade = cv2.CascadeClassifier("./venv/Lib/site-packages/cv2/data/haarcascade_frontalface_default.xml")
 
     k = 0
 
