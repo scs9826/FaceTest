@@ -36,10 +36,10 @@ def detect(dataMat, label):
             roi_gray = gray[y: y + h, x: x + w]
             img = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
             img1 = frame[y: y + h, x: x + w]
-            cv2.imwrite('./pic/s0.bmp', roi_gray)
-            pic = cv2.imread('./pic/s0.bmp')
+            cv2.imwrite('./pic1/s0.bmp', roi_gray)
+            pic = cv2.imread('./pic1/s0.bmp')
             pic = cv2.resize(pic, (100, 100), interpolation=cv2.INTER_CUBIC)
-            os.remove('./pic/s0.bmp')
+            os.remove('./pic1/s0.bmp')
             cv2.imwrite('./pic/s0.bmp', pic)
             # print("hello world")
         if k == 0:

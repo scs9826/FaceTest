@@ -1,4 +1,5 @@
 import ImageSet
+import PCA
 import createImageSet
 import numpy as np
 import LDA
@@ -66,25 +67,35 @@ def getResult(dataMat, label, testNum, classNum):
 
 
 if __name__ == '__main__':
-    for i in range(1, 11):
+    # for i in range(1, 11):
 
-        dataMat, label = createImageSet.createImageMat('Yale', 16, 11, 176, 100 * 100)
-        # getResult(dataMat, label, 5, 16)
-        disc_set, disc_value = LDA.pca(dataMat, 50)
-        redVects, Train_LDA = LDA.lda(dataMat, label, 50, 16, 11, 11 * 16)  # LDA投影空间，最终的训练集
-        testImgSet = './Yale/17/s' + str(i) + '.bmp'
-        # testImgSet = './Yale/16/s1.bmp'
-        # testImgSet = createImageSet.createTestMat('Yale', testInClass, testNum, testInClass, 100 * 100)
-        testImgSet = ImageSet.HistogramEqualization(testImgSet)
-        testImgSet = np.reshape(testImgSet, (-1, 1))
-        testImgSet = disc_set.T.dot(testImgSet)
-        testImgSet = redVects.T.dot(testImgSet)
-        disList = []
-        testVec = np.reshape(testImgSet, (1, -1))
-        # print('testVec', testVec.shape)
-
-        for sample in Train_LDA.T:
-            disList.append(np.linalg.norm(testVec - sample))
-        # print('disList', disList)
-        sortIndex = np.argsort(disList)
-        print(i, ":", label[sortIndex[0]])
+    #
+    dataMat, label = createImageSet.createImageMat('Yale', 16, 11, 176, 100 * 100)
+    # getResult(dataMat, label, 5, 16)
+    # disc_set, disc_value = LDA.pca(dataMat, 50)
+    # redVects, Train_LDA = LDA.lda(dataMat, label, 50, 16, 11, 11 * 16)  # LDA投影空间，最终的训练集
+    testImgSet = './pic/s0.bmp'
+    testImg = ImageSet.HistogramEqualization(testImgSet)
+    testImg = np.reshape(testImg, (-1, 1))
+    lowMat, redVects = PCA.pca(dataMat, 0.99)
+    testImg = redVects.T * testImg
+    disList = []
+    testVec = np.reshape(testImg, (1, -1))
+    for sample in lowMat.T:
+        disList.append(np.linalg.norm(testVec - sample))
+    sortIndex = np.argsort(disList)
+    # # testImgSet = './Yale/16/s1.bmp'
+    # # testImgSet = createImageSet.createTestMat('Yale', testInClass, testNum, testInClass, 100 * 100)
+    # testImgSet = ImageSet.HistogramEqualization(testImgSet)
+    # testImgSet = np.reshape(testImgSet, (-1, 1))
+    # testImgSet = disc_set.T.dot(testImgSet)
+    # testImgSet = redVects.T.dot(testImgSet)
+    # disList = []
+    # testVec = np.reshape(testImgSet, (1, -1))
+    # # print('testVec', testVec.shape)
+    #
+    # for sample in Train_LDA.T:
+    #     disList.append(np.linalg.norm(testVec - sample))
+    # # print('disList', disList)
+    # sortIndex = np.argsort(disList)
+    print(0, ":", label[sortIndex[0]])

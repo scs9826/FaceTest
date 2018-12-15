@@ -58,12 +58,10 @@ def createImageMat(dirName, classNum, classInNum, ImageNum, ImageSize):
     index = 0
     for classnum in range(1, classNum + 1):
         for classinnum in range(1, classInNum + 1):
-            # TODO 所有图片解析?
             img = ImageSet.HistogramEqualization(
                 './' + str(dirName) + '/' + str(classnum) + '/' + 's' + str(classinnum) + '.bmp')
             # print('均衡化后的图像矩阵',img)
             tempImg = np.reshape(img, (-1, 1))  # 每张图转化为一列
-            # TODO 矩阵填充？
             if index == 0:
                 dataMat = tempImg
                 label.append(str(classnum))
@@ -71,7 +69,6 @@ def createImageMat(dirName, classNum, classInNum, ImageNum, ImageSize):
                 index += 1
             else:
                 dataMat = np.column_stack((dataMat, tempImg))
-                # TODO ？
                 dataMat = np.mat(dataMat)  # 列合并，然后转为矩阵
                 label.append(str(classnum))
                 # label[:, index] = classnum

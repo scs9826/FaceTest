@@ -48,6 +48,8 @@ def inv(m):
 
     i = np.eye(a, a)
     return np.linalg.lstsq(m, i)[0]
+
+
 def lda(dataMat, label, dimNum, classNum, classInNum, ImgNum):
     disc_set, disc_value = pca(dataMat, dimNum)
     # print('ds',disc_set.shape)
